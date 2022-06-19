@@ -1,22 +1,11 @@
-<template>
-  <v-app dark>
-    <v-main>
-    <div
-      v-if="loading"
-      class="loading-parent" 
-      >
-      <v-container 
-            fluid>
-              <v-progress-circular
-                :size="70"
-                :width="7"
-                color="purple"
-                indeterminate
-            ></v-progress-circular>
-      </v-container>
-    </div>
-    </v-main>
-  </v-app>
+<template lang="html">
+  <v-overlay v-if="loading" :value="overlay">
+    <v-progress-circular
+      indeterminate
+      size="64"
+      color="primary"
+    ></v-progress-circular>
+  </v-overlay>
 </template>
 
 // TODO :: belum selesai
@@ -24,32 +13,30 @@
 <script>
 export default {
    data: () => ({
-    loading: false
+    loading: false,
+    overlay: false,
   }),
   methods: {
-    start () {
+   start() {
       this.loading = true
+      this.overlay = true
     },
-    finish () {
+    finish() {
       this.loading = false
-    }
+      this.overlay = false
+    },
+    fail(error) {
+      console.log(error)
+    },
+    increase(num) {
+      // console.log(num)
+    },
   }
 }
 </script>
 
 
 <style scoped>
-.loading-parent{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 0px;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: white; 
-  z-index: 99999;
-}
 .v-progress-circular {
   margin: 1rem;
 }

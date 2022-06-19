@@ -17,6 +17,7 @@ import googleFonts from './config/googleFonts'
 import i18n from './config/i18n'
 import modules from './config/modules'
 // import image from './config/image'
+import storage from './config/storage'
 import privateRuntimeConfig from './config/privateRuntimeConfig'
 import publicRuntimeConfig from './config/publicRuntimeConfig'
 
@@ -68,6 +69,12 @@ export default {
 
     // i18n module configuration: https://i18n.nuxtjs.org/
     i18n,
+
+    // Universal Storage module configuration: https://github.com/nuxt-community/universal-storage-module#usage
+    storage,
+
+    // Nuxt image module configuration: https://image.nuxtjs.org
+    // image,
 
     // Modules: https://go.nuxtjs.dev/config-modules
     modules,

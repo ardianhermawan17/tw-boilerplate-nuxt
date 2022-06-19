@@ -1,117 +1,157 @@
 <template>
-  <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
+  <v-app>
+    <v-app-bar fixed color="white" app>
+      <v-toolbar-title
+        class="light-blue--text text--darken-4"
+        >SI AUTOFINTION</v-toolbar-title
+      >
+      <v-responsive width="80%">
+        <v-tabs
+          right
+          active-class="text--black"
+          class="px-8"
+          color="light-blue darken-4"
+          light
         >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-app-bar
-      :clipped-left="clipped"
-      fixed
-      app
-    >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+          <v-tab
+            v-for="link in links"
+            :key="link"
+          >
+            {{ link }}
+          </v-tab>
+        </v-tabs>
+      </v-responsive>
+
       <v-btn
-        icon
-        @click.stop="miniVariant = !miniVariant"
+        depressed
+        class="px-6 yellow--text"
+        color="light-blue darken-4"
+        >Login</v-btn
       >
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="clipped = !clipped"
-      >
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="fixed = !fixed"
-      >
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title" />
-      <v-spacer />
-      <v-btn
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
+      <!-- TODO :: Kek ono link  -->
     </v-app-bar>
-    <v-main>
-      <v-container>
+    <v-main class="grey lighten-3">
+      <v-container
+        fluid
+        class="px-0 py-0 blue-grey lighten-5"
+      >
         <Nuxt />
       </v-container>
     </v-main>
-    <v-navigation-drawer
-      v-model="rightDrawer"
-      :right="right"
-      temporary
-      fixed
-    >
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light>
-              mdi-repeat
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer
-      :absolute="!fixed"
-      app
-    >
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+    <v-footer dark padless>
+      <v-card
+        flat
+        tile
+        width="100%"
+        class="light-blue darken-4 white--text text-center"
+      >
+        <v-container
+          class="py-12"
+          fluid
+        >
+          <v-row>
+            <v-col lg="4" sm="12">
+              <v-container
+                class="d-flex flex-row"
+              >
+                <div>
+                  <v-img
+                    max-height="80"
+                    max-width="80"
+                    :src="
+                      require('~/static/pens-logo-putih.png')
+                    "
+                  ></v-img>
+                </div>
+                <v-card-text
+                  class="text-left"
+                >
+                  Mencari data peraturan
+                  keuangan dengan cepat
+                </v-card-text>
+              </v-container>
+            </v-col>
+
+            <v-col lg="4" sm="12">
+              <v-row>
+                <v-card-text
+                  class="text-h6"
+                >
+                  SI AUTOFINTION
+                </v-card-text>
+                <v-card-text>
+                  Mencari data peraturan
+                  keuangan dengan cepat
+                </v-card-text>
+              </v-row>
+            </v-col>
+
+            <v-col lg="4" sm="12">
+              <v-row>
+                <v-card-text
+                  class="text-h6"
+                >
+                  Temukan Kami
+                </v-card-text>
+                <v-card-text>
+                  <v-btn
+                    v-for="icon in icons"
+                    :key="icon"
+                    class="mx-4 white--text"
+                    icon
+                  >
+                    <v-icon size="24px">
+                      {{ icon }}
+                    </v-icon>
+                  </v-btn>
+                </v-card-text>
+              </v-row>
+            </v-col>
+          </v-row>
+        </v-container>
+
+        <v-divider></v-divider>
+
+        <v-flex class="yellow accent-2">
+          <v-card-text>
+            <strong
+              class="light-blue--text text--darken-4 text-subtitle-1 font-weight-bold"
+            >
+              {{
+                new Date().getFullYear()
+              }}
+              — Imanuddin Ardian
+              Hermawan, All right
+              reserved</strong
+            >
+          </v-card-text>
+        </v-flex>
+      </v-card>
     </v-footer>
   </v-app>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
-        }
-      ],
       miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js'
+      title: 'Vuetify.js',
+      links: ['Beranda', 'Peraturan'],
+      icons: [
+        'mdi-facebook',
+        'mdi-twitter',
+        'mdi-linkedin',
+        'mdi-instagram'
+      ]
     }
-  },
+  }
+  // mounted() {
+  //   this.$nextTick(() => {
+  //     this.$nuxt.$loading.start()
+  //     setTimeout(() => this.$nuxt.$loading.finish(), 20000)
+  //     // TODO :: hilangi loading mode debugging
+  //   })
+  // }
 }
 </script>

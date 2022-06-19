@@ -6,7 +6,7 @@ export default [
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     // https://image.nuxtjs.org/
-    // '@nuxt/image', error because SSr
+    // '@nuxt/image', // error because SSr
     // https://github.com/nuxt-community/universal-storage-module/
     '@nuxtjs/universal-storage'
 ]
