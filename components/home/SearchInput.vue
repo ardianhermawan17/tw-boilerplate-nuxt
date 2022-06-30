@@ -7,20 +7,37 @@
     >
       Cari aturan keuangan dibawah ini
     </p>
-    <div
-      class="d-flex flex-row justify-center align-center"
+    <HomeSearchDialogInput
+      name="home-search-input-dialog"
     >
-      <v-responsive
-        max-width="80%"
-        class="px-4 py-4 d-flex flex-row justify-center align-center"
+      <div
+        slot="toggler"
+        @click.stop="
+          $baseDialog(
+            'open',
+            'home-search-input-dialog'
+          )
+        "
       >
-        <base-text-field
-          append-icon="mdi-magnify"
-          label="Aturan"
-          placeholder="Cari Aturan...."
-        />
-      </v-responsive>
-    </div>
+        <div
+          class="d-flex flex-row justify-center align-center"
+        >
+          <v-responsive
+            max-width="80%"
+            class="px-4 py-4 d-flex flex-row justify-center align-center"
+          >
+            <base-text-field
+              :is-neumorphism="true"
+              :outlined="true"
+              height="60px"
+              append-icon="mdi-magnify"
+              label="Aturan"
+              placeholder="Cari Aturan...."
+            />
+          </v-responsive>
+        </div>
+      </div>
+    </HomeSearchDialogInput>
   </section>
 </template>
 

@@ -1,23 +1,38 @@
 <template>
-  <div
-    class="neumorphism-shadow py-6 px-4"
-  >
-    <v-text-field
-      :append-icon="appendIcon"
-      :label="label"
-      :placeholder="placeholder"
-      :color="color"
-      :class="className"
-      dense
-      light
-    ></v-text-field>
-  </div>
+  <v-text-field
+    :height="height"
+    :hide-details="hideDetails"
+    :outlined="outlined"
+    :append-icon="appendIcon"
+    :label="label"
+    :placeholder="placeholder"
+    :color="color"
+    :class="neumorphismClass"
+    dense
+    light
+  ></v-text-field>
 </template>
 
 <script>
 export default {
   name: 'BaseTextField',
   props: {
+    height: {
+      type: String || Number,
+      default: undefined
+    },
+    hideDetails: {
+      type: Boolean,
+      default: undefined
+    },
+    isNeumorphism: {
+      type: Boolean,
+      default: true
+    },
+    outlined: {
+      type: Boolean,
+      default: false
+    },
     label: {
       type: String,
       default: 'Your value',
@@ -39,15 +54,29 @@ export default {
     },
     appendIcon: {
       type: String,
-      default: undefined      
+      default: undefined
+    }
+  },
+  computed: {
+    neumorphismClass() {
+      if (this.isNeumorphism) {
+        return [
+          'neumorphism-shadow ' +
+            this.className
+        ]
+      } else {
+        return [this.className]
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-.neumorphism-shadow {
+.neumorphism-border {
   border: 4px solid #01579b;
+}
+.neumorphism-shadow {
   box-shadow: -6px -6px 12px #ffffff,
     6px 6px 12px
       rgba(111, 112, 113, 0.8);

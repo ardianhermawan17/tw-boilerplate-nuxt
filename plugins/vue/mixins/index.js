@@ -10,6 +10,26 @@ if (!Vue.__global_mixin__) {
                 }
             }
         },
+        filters: {
+            formatPrice(price, prefix = 'Rp') {
+                const numberToString = String(price)
+                    .replace(/[^,\d]/g, '')
+                    .toString()
+                const split = numberToString.split(',')
+                const sisa = split[0].length % 3
+                let rupiah = split[0].substr(0, sisa)
+                const ribuan = split[0].substr(sisa).match(/\d{3}/gi)
+
+
+                if (ribuan) {
+                    const separator = sisa ? '.' : ''
+                    rupiah += separator + ribuan.join('.')
+                }
+
+                rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah
+                return prefix + rupiah
+            },
+        },
         computed: {
             $user() {
                 // TODO:: Rearrange this with your state
@@ -17,8 +37,8 @@ if (!Vue.__global_mixin__) {
             }
         },
         methods: {
-            $baseModal(action, modalName) {
-                this.$nuxt.$emit('toggle-modal', { action, modalName })
+            $baseDialog(action, dialog) {
+                this.$nuxt.$emit('toggle-dialog', { action, dialog })
             },
             $baseSnackbar(name, snackbarData) {
                 this.$nuxt.$emit(
@@ -26,9 +46,9 @@ if (!Vue.__global_mixin__) {
                     Object.assign(snackbarData, { name })
                 )
             },
-            $switchModal(closeModal, openModal) {
-                this.$baseModal('close', closeModal)
-                this.$baseModal('open', openModal)
+            $switchDialog(toCloseDialog, toOpenDialog) {
+                this.$baseDialog('close', toCloseDialog)
+                this.$baseDialog('open', toOpenDialog)
             }
         },
     })

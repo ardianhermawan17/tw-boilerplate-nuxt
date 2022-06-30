@@ -15,15 +15,20 @@
         >
           <v-tab
             v-for="link in links"
-            :key="link"
+            :key="link.name"
+            nuxt
+            :to="link.link"
           >
-            {{ link }}
+          
+            {{ link.name }}
           </v-tab>
         </v-tabs>
       </v-responsive>
 
       <v-btn
         depressed
+        nuxt
+        to="auth/login"
         class="px-6 yellow--text"
         color="light-blue darken-4"
         >Login</v-btn
@@ -137,7 +142,10 @@ export default {
     return {
       miniVariant: false,
       title: 'Vuetify.js',
-      links: ['Beranda', 'Peraturan'],
+      links: [
+        {'name': 'Beranda', 'link': '/'}, 
+        {'name': 'Peraturan', 'link': '/peraturan'}
+        ],
       icons: [
         'mdi-facebook',
         'mdi-twitter',

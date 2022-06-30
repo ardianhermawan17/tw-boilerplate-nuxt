@@ -1,5 +1,12 @@
 import authenticationService from '~/service/authentication.service'
+import peraturanService from '~/service/peraturan.service'
+import kategoriService from '~/service/kategori.service'
+import keywordService from '~/service/keyword.service'
+
 
 export default ({ $axios }, inject) => {
-    inject('authenticationService', authenticationService($axios, '/api/auth'))
+    inject('authenticationService', authenticationService($axios, '/api/admin/auth'))
+    inject('peraturanService', peraturanService($axios, '/api/admin/peraturan'))
+    inject('kategoriService', kategoriService($axios, '/api/admin/kategori'))
+    inject('keywordService', keywordService($axios, '/api/admin/keyword'))
 }

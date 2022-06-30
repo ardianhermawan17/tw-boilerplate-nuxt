@@ -11,12 +11,13 @@
     <div
       class="d-flex justify-center align-center mb-8"
     >
-      <v-btn
+      <!-- <v-btn
         depressed
         class="px-6 white--text"
         color="light-blue darken-4"
         >Klik Disini</v-btn
-      >
+      > -->
+      <HomeSearchDialog />
       <!-- TODO :: Kek ono link  -->
     </div>
     <v-row justify="space-between">
@@ -51,7 +52,9 @@
     </v-row>
     <!-- CHART -->
     <div class="mt-12">
-      <base-card color="light-blue darken-4">
+      <base-card
+        color="light-blue darken-4"
+      >
         <base-bar-chart />
       </base-card>
     </div>
