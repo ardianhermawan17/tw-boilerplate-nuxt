@@ -2,43 +2,43 @@
     <v-container class="py-6">
     <div class="my-11">
       <p class="text-h6 black--text">
-        List Kategori
+        List Keyword
       </p>
       <v-row
         class="py-4"
         justify="space-between"
       >
         <v-col sm="6" md="6">
-          <AdminKategoriCreateFormDialog
-            name="admin-kategori-create-form-dialog"
+          <AdminKeywordCreateFormDialog
+            name="admin-keyword-create-form-dialog"
           >
             <div
               slot="toggler"
               @click="$baseDialog(
                 'open',
-                'admin-kategori-create-form-dialog'
+                'admin-keyword-create-form-dialog'
               )"
             >
               <v-btn color="green">
                 <v-icon left dark>
                   mdi-plus-circle
                 </v-icon>
-                Buat Kategori
+                Buat Keyword
               </v-btn>
             </div>
-          </AdminKategoriCreateFormDialog>
+          </AdminKeywordCreateFormDialog>
         </v-col>
         <v-col sm="6" md="6">
           <v-row>
             <v-col class="ml-auto" sm="10"
-              ><AdminKategoriSearchInput />
+              ><AdminKeywordSearchInput />
             </v-col>            
           </v-row>
         </v-col>
       </v-row>
       <div class="py-5">
         <base-card>
-          <AdminKategoriTable />
+          <AdminKeywordTable />
         </base-card>
       </div>
     </div>
@@ -47,7 +47,7 @@
 
 <script>
 export default {
-    name: 'AdminKategori',
+    name: 'AdminKeyword',
     layout: 'admin/default'
 }
 </script>

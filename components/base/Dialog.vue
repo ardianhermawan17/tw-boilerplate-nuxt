@@ -1,7 +1,8 @@
 <template>
   <v-dialog
-    v-model="isOpened"    
-    transition="dialog-transition"
+    v-model="isOpened"  
+    transition="dialog-transition"  
+    @click:outside="e => $emit('click:outside', e)"
   >
     <slot :closeDialog="closeDialog">
       Default Content

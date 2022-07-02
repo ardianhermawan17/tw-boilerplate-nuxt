@@ -33,6 +33,7 @@
               append-icon="mdi-magnify"
               label="Aturan"
               placeholder="Cari Aturan...."
+              @change="onSearching"
             />
           </v-responsive>
         </div>
@@ -43,6 +44,11 @@
 
 <script>
 export default {
-  name: 'HomeSearchInput'
+  name: 'HomeSearchInput',
+  methods: {
+    onSearching(data) {
+      console.log(data)
+    }
+  }
 }
 </script>

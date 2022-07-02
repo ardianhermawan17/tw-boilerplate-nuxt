@@ -1,17 +1,16 @@
 export default {
-    async getKategori({ state, commit }) {
+    async getKeyword({ state, commit }) {
         commit('SET_LOADING', true)
         const {
             code,
             data,
             message,
             errors
-        } = await this.$kategoriService.getKategori({
+        } = await this.$keywordService.getKeyword({
             params: {
                 ...state.filter
             }
         })
-
 
         if (code !== 200) {
             return {
@@ -36,15 +35,19 @@ export default {
             data
         }
     },
-    async getNonPaginationKategori({ state, commit }) {
+    async getNonPaginationKeyword({
+        state,
+        commit
+    }) {
         commit('SET_LOADING', true)
         const {
             code,
             data,
             message,
             errors
-        } = await this.$kategoriService.getKategori({})
-
+        } = await this.$keywordService.getKeyword(
+            null
+        )
 
         if (code !== 200) {
             return {
@@ -69,14 +72,17 @@ export default {
             data
         }
     },
-    async updateKategori({ state, commit }, { kategoriId, payload }) {
+    async updateKeyword({ state, commit }, { keywordId, payload }) {
         commit('SET_LOADING', true)
         const {
             code,
             data,
             message,
             errors
-        } = await this.$kategoriService.updateKategori(kategoriId, payload)
+        } = await this.$keywordService.updateKeyword(
+            keywordId,
+            payload
+        )
 
         if (code !== 200) {
             return {
@@ -101,15 +107,18 @@ export default {
             data
         }
     },
-    async showKategori({ state, commit }, kategoriId) {
+    async showKeyword({ state, commit },
+        keywordId
+    ) {
         commit('SET_LOADING', true)
         const {
             code,
             data,
             message,
             errors
-        } = await this.$kategoriService.showKategori(kategoriId)
-
+        } = await this.$keywordService.showKeyword(
+            keywordId
+        )
 
         if (code !== 200) {
             return {
@@ -134,15 +143,18 @@ export default {
             data
         }
     },
-    async deleteKategori({ state, commit }, kategoriId) {
+    async deleteKeyword({ state, commit },
+        keywordId
+    ) {
         commit('SET_LOADING', true)
         const {
             code,
             data,
             message,
             errors
-        } = await this.$kategoriService.deleteKategori(kategoriId)
-
+        } = await this.$keywordService.deleteKeyword(
+            keywordId
+        )
 
         if (code !== 200) {
             return {
@@ -162,24 +174,24 @@ export default {
             data
         }
     },
-    async createKategori({ state, commit }, payload) {
+    async createKeyword({ state, commit },
+        payload
+    ) {
         commit('SET_LOADING', true)
-        console.log(payload)
         const {
             code,
             data,
             message,
             errors
-        } = await this.$kategoriService.createKategori(payload)
-
+        } = await this.$keywordService.createKeyword(
+            payload
+        )
 
         if (code !== 200) {
             return {
                 status: code,
-                error: {
-                    errors,
-                    message
-                }
+                errors,
+                message
             }
         }
 
@@ -188,7 +200,7 @@ export default {
             error: null,
             code,
             message,
-            data,
+            data
         }
-    },
+    }
 }

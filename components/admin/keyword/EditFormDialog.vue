@@ -21,18 +21,18 @@
             @click.stop="
               $baseDialog(
                 'close',
-                'admin-kategori-edit-form-dialog'
+                name
               )
             "
           >
             <v-icon>mdi-close</v-icon>
           </v-btn>
         </v-toolbar>
+        <!-- <v-divider></v-divider> -->
         <v-container>
           <v-card-title
             class="black--text text-h5 text-center d-flex justify-center align-center"
-            >Create
-            Kategori</v-card-title
+            >Edit Kategori</v-card-title
           >
           <validation-observer
             ref="observer"
@@ -43,40 +43,19 @@
             >
               <validation-provider
                 v-slot="{ errors }"
-                name="email"
-                rules="required|email"
-              >
-                <v-text-field                
-                  v-model="
-                    credentials.email
-                  "
-                  :error-messages="
-                    errors
-                  "
-                  light
-                  label="E-mail"
-                  placeholder="Enter your email"
-                  outlined
-                  required
-                ></v-text-field>
-              </validation-provider>
-
-              <validation-provider
-                v-slot="{ errors }"
-                name="Password"
+                name="name"
                 rules="required"
               >
                 <v-text-field
                   v-model="
-                    credentials.password
+                    form.name
                   "
                   :error-messages="
                     errors
                   "
-                  append-icon="mdi-eye"
                   light
-                  label="Password"
-                  placeholder="Enter your password"
+                  label="Keyword"
+                  placeholder="Enter keyword"
                   outlined
                   required
                 ></v-text-field>
@@ -85,13 +64,13 @@
               <div class="d-flex">
                 <v-spacer></v-spacer>
                 <v-btn
-                  dark
+                  light
                   class="mr-4"
                   color="light-blue darken-4 white--text"
                   type="submit"
                   :disabled="invalid"
                 >
-                  Login
+                  Simpan
                 </v-btn>
               </div>
             </form>
@@ -103,8 +82,12 @@
 </template>
 
 <script>
+import {
+  mapState,
+  mapMutations
+} from 'vuex'
 export default {
-  name: 'AdminKategoriAddDialog',
+  name: 'AdminKeywordCreateFormDialog',
   props: {
     name: {
       type: String,
@@ -114,11 +97,58 @@ export default {
   },
   data() {
     return {
-      credentials: {
-        email: '',
-        password: ''
-      },
-      passwordFieldType: 'text'
+      form: {
+        name: '',
+        kategori: []
+      }
+    }
+  },
+  computed: {
+    ...mapState('admin/keyword', {
+      detailItem: 'detailItem'
+    })
+  },
+  watch: {
+    detailItem(value) {      
+      this.form = Object.assign(
+        {},
+        this.detailItem
+      )
+    }
+  },
+  methods: {
+    ...mapMutations('admin/keyword', {
+      SET_DETAIL_ITEM: 'SET_DETAIL_ITEM'
+    }),
+    async submit() {
+      const res =
+        await this.$store.dispatch(
+          'admin/keyword/updateKeyword',
+          {
+            keywordId:
+              this.form.id,
+            payload: Object.assign(
+              {},
+              this.form
+            )
+          }
+        )
+      this.$baseSnackbar(
+        'admin-snackbar',
+        {
+          title: 'Success',
+          text: res.message,
+          color: 'success',
+          duration: 3000
+        }
+      )
+      await this.$store.dispatch(
+        'admin/kategori/getKategori'
+      )
+      this.$baseDialog(
+        'close',
+        this.name
+      )
     }
   }
 }

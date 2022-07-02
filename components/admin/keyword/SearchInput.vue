@@ -4,8 +4,8 @@
     :is-neumorphism="true"
     :outlined="true"
     append-icon="mdi-magnify"
-    label="Aturan"
-    placeholder="Cari Aturan...."
+    label="Keyword"
+    placeholder="Cari Keyword...."
     @change="searchItem"
   />
 </template>
@@ -16,19 +16,19 @@ import {
   mapGetters
 } from 'vuex'
 export default {
-  name: 'AdminPeraturanSearchInput',
+  name: 'AdminKeywordSearchInput',
   data() {
     return {
       search: null
     }
   },
   computed: {
-    ...mapGetters('admin/kategori', {
+    ...mapGetters('admin/keyword', {
       filter: 'filter'
     })
   },
   methods: {
-    ...mapMutations('admin/kategori', {
+    ...mapMutations('admin/keyword', {
       SET_FILTER: 'SET_FILTER'
     }),
     searchItem(query) {
@@ -44,7 +44,7 @@ export default {
         search
       })
       this.$store.dispatch(
-        'admin/kategori/getKategori'
+        'admin/keyword/getKeyword'
       )
     }
   }

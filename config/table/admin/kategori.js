@@ -12,6 +12,13 @@ export default [{
         class: 'light-blue darken-4 white--text'
     },
     {
+        text: 'Keyword',
+        sortable: false,
+        width: '40%',
+        value: 'keyword',
+        class: 'light-blue darken-4 white--text'
+    },
+    {
         text: 'Action',
         sortable: false,
         value: 'action',

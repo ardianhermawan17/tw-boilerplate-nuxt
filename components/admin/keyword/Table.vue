@@ -21,58 +21,37 @@
         ]
       }"
       @update:page="onPaginateClick"
-      @update:items-per-page="
-        updateItemsPerPage">
-     <template v-slot:[`item.keyword`]="{ item }">
-        <div class="d-flex flex-wrap">
-          <div
-              class="d-flex flex-wrap"
-              v-for="(data,i) in item.keyword"
-              :key="`items-${i}`"
-          >
-            <v-chip
-                color="light-blue darken-4 white--text"
-                class="px-2 mx-1 my-2 text--white"
-            >
-              {{ data.name }}
-            </v-chip>
-          </div>
-        </div>
-      </template>
-
+      @update:items-per-page="updateItemsPerPage">
       <template
-        v-slot:[`item.action`]="{
-          item
-        }"
-      >
+        v-slot:[`item.action`]="{item}">
         <div
           class="d-flex justify-center align-center"
         >
-          <AdminKategoriTableButton
-            description="Kategori"
+          <AdminKeywordTableButton
+            description="Keyword"
             action-type="view"
             @click="detailItem(item)"
-          ></AdminKategoriTableButton>
+          ></AdminKeywordTableButton>
 
-          <AdminKategoriTableButton
-            description="Kategori"
+          <AdminKeywordTableButton
+            description="Keyword"
             action-type="edit"
             @click="editItem(item)"
-          ></AdminKategoriTableButton>
+          ></AdminKeywordTableButton>
 
-          <AdminKategoriTableButton
-            description="Kategori"
+          <AdminKeywordTableButton
+            description="Keyword"
             action-type="delete"
             @click="deleteItem(item)"
-          ></AdminKategoriTableButton>
+          ></AdminKeywordTableButton>
         </div>
       </template>
     </v-data-table>
-    <AdminKategoriEditFormDialog
-      name="admin-kategori-edit-form-dialog"
+    <AdminKeywordEditFormDialog
+      name="admin-keyword-edit-form-dialog"
     />
-    <AdminKategoriDetailFormDialog
-      name="admin-kategori-detail-form-dialog"
+    <AdminKeywordDetailFormDialog
+      name="admin-keyword-detail-form-dialog"
     />
   </div>
 </template>
@@ -83,7 +62,7 @@ import {
   mapGetters,
   mapMutations
 } from 'vuex'
-import headers from '~/config/table/admin/kategori'
+import headers from '~/config/table/admin/keyword'
 import tableMixin from '~/plugins/vue/mixins/table'
 export default {
   name: 'AdminKategoriTable',
@@ -94,12 +73,12 @@ export default {
     }
   },
   computed: {
-    ...mapState('admin/kategori', {
+    ...mapState('admin/keyword', {
       items: 'items',
       loading: 'loading',
       detail: 'detailItem'
     }),
-    ...mapGetters('admin/kategori', {
+    ...mapGetters('admin/keyword', {
       filter: 'filter'
     })
   },
@@ -107,35 +86,33 @@ export default {
     this.fetchAPI()
   },
   methods: {
-    ...mapMutations('admin/kategori', [
+    ...mapMutations('admin/keyword', [
       'SET_FILTER',
       'SET_DETAIL_ITEM'
     ]),
     fetchAPI() {
       this.$store.dispatch(
-        'admin/kategori/getKategori'
+        'admin/keyword/getKeyword'
       )
     },
-    detailItem(item) {      
-      this.SET_DETAIL_ITEM(item)      
-      this.$baseDialog(
-        'open',
-        'admin-kategori-detail-form-dialog'
-      )
-    },
-    async editItem(item) {
-      await this.$store.dispatch('admin/keyword/getNonPaginationKeyword')
-      // console.log(this.$store.state.admin.keyword.nonPaginationItems)
+    detailItem(item) {
       this.SET_DETAIL_ITEM(item)
       this.$baseDialog(
         'open',
-        'admin-kategori-edit-form-dialog'
+        'admin-keyword-detail-form-dialog'
+      )
+    },
+    editItem(item) {
+      this.SET_DETAIL_ITEM(item)
+      this.$baseDialog(
+        'open',
+        'admin-keyword-edit-form-dialog'
       )
     },
     async deleteItem(item) {
       const res =
         await this.$store.dispatch(
-          'admin/kategori/deleteKategori',
+          'admin/keyword/deleteKeyword',
           item.id
         )
       if (res.code === 200)

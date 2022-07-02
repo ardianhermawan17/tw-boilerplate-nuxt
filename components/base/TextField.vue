@@ -10,6 +10,9 @@
     :class="neumorphismClass"
     dense
     light
+    @change="onChange"
+    @click:append="$emit('click:append',$event.target)"
+    @keydown.enter="onKeydownEnter"
   ></v-text-field>
 </template>
 
@@ -67,6 +70,18 @@ export default {
       } else {
         return [this.className]
       }
+    }
+  },
+  methods: {
+    onChange(e) {      
+      this.$emit('change', e)
+    },
+    onKeydownEnter(e){
+      this.$emit('keydown.enter', e)
+    },
+    onAppendIcon(e) {
+      console.log(this.$event)
+      this.$emit('click:append',e)
     }
   }
 }

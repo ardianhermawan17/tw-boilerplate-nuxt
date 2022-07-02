@@ -1,9 +1,9 @@
 <template>
   <div class="flex">
     <slot name="toggler" />
-    <base-dialog :name="name">
+    <base-dialog :name="name" @click:outside="reset">
       <v-card
-       v-if="!loading"
+        v-if="!loading"
         class="blue-grey lighten-5"
       >
         <v-toolbar
@@ -22,18 +22,15 @@
             @click.stop="
               $baseDialog(
                 'close',
-                'admin-kategori-edit-form-dialog'
-              )
-            "
-          >
+                name
+              )">
             <v-icon>mdi-close</v-icon>
           </v-btn>
         </v-toolbar>
-        <!-- <v-divider></v-divider> -->
         <v-container>
           <v-card-title
             class="black--text text-h5 text-center d-flex justify-center align-center"
-            >Edit Kategori</v-card-title
+            >Buat Keyword</v-card-title
           >
           <validation-observer
             ref="observer"
@@ -48,25 +45,27 @@
                 rules="required"
               >
                 <v-text-field
-                  v-model="form.name"
+                  v-model="
+                    form.name
+                  "
                   :error-messages="
                     errors
                   "
                   light
-                  label="Kategori"
-                  placeholder="Enter kategori"
+                  label="Keyword"
+                  placeholder="Enter Keyword"
                   outlined
                   required
                 ></v-text-field>
               </validation-provider>
 
               <validation-provider
-                name="keyword"
+                name="kategori"
               >
                 <v-select
-                  v-model="form.keyword"
+                  v-model="form.kategori"
                   light                  
-                  :items="keywords"
+                  :items="listKategori"
                   item-text="name"
                   item-value="id"                 
                   clearable
@@ -89,7 +88,7 @@
                   type="submit"
                   :disabled="invalid"
                 >
-                  Simpan
+                  Buat
                 </v-btn>
               </div>
             </form>
@@ -101,12 +100,9 @@
 </template>
 
 <script>
-import {
-  mapState,
-  mapMutations
-} from 'vuex'
+import { mapState} from 'vuex'
 export default {
-  name: 'AdminKategoriCreateFormDialog',
+  name: 'AdminKeywordCreateFormDialog',
   props: {
     name: {
       type: String,
@@ -118,65 +114,57 @@ export default {
     return {
       form: {
         name: '',
-        keyword: []
-      },      
+        kategori: []
+      }
     }
   },
-  async fetch() {
-    const res = await this.$store.dispatch('admin/keyword/getNonPaginationKeyword')
-    this.form.keyword = res.data    
+   async fetch() {
+    await this.$store.dispatch('admin/kategori/getNonPaginationKategori')     
   },
   computed: {
     ...mapState('admin/kategori', {
-      detailItem: 'detailItem'
-    }),
-    ...mapState('admin/keyword', {
-      keywords: 'nonPaginationItems',
+      listKategori: 'nonPaginationItems',
       loading: 'loading'
     })
   },
-  watch: {
-    detailItem(value) {      
-      this.form = Object.assign(
-        {},
-        this.detailItem
-      )      
-    }   
-  },
   methods: {
-    ...mapMutations('admin/kategori', {
-      SET_DETAIL_ITEM: 'SET_DETAIL_ITEM'
-    }),
     async submit() {
       const res =
         await this.$store.dispatch(
-          'admin/kategori/updateKategori',
+          'admin/keyword/createKeyword',
+          this.form
+        )
+        console.log(res)        
+      if (res.code === 200) {
+        this.$baseSnackbar(
+          'admin-snackbar',
           {
-            kategoriId: this.form.id,
-            payload: Object.assign(
-              {},
-              this.form
-            )
+            title: 'Success',
+            text: res.message,
+            color: 'success',
+            duration: 3000
           }
         )
-      this.$baseSnackbar(
-        'admin-snackbar',
-        {
-          title: 'Success',
-          text: res.message,
-          color: 'success',
-          duration: 3000
-        }
-      )
-      await this.$store.dispatch(
-        'admin/kategori/getKategori'
-      )
+        await this.$store.dispatch(
+          'admin/keyword/getKeyword'
+        )
+      } else if (res.code !== 200) {
+        this.$baseSnackbar(
+          'admin-snackbar',
+          {
+            title: 'Error',
+            text: res.message,
+            color: 'error',
+            duration: 3000
+          }
+        )
+      }
       this.$baseDialog(
         'close',
-        'admin-kategori-edit-form-dialog'
+        this.name
       )
     },
-    reset() {              
+     reset() {           
         this.$refs.observer.reset()
       },
   }
