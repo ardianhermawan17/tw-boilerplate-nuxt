@@ -45,7 +45,7 @@ export default {
             data,
             message,
             errors
-        } = await this.$autoSearchService.getFilterSearchByKeywordKategori({
+        } = await this.$autoSearchService.getFilterSearchByKeywordPeraturan({
             params: {
                 search: state.search,
                 keyword_ids: state.keyword_ids
@@ -70,5 +70,41 @@ export default {
             message,
             data
         }
-    }
+    },
+
+    async getKeywords({
+        state,
+        commit
+    }) {
+        commit('SET_LOADING_KEYWORD', true)
+        const {
+            code,
+            data,
+            message,
+            errors
+        } = await this.$autoSearchService.getKeywords({
+            params: {
+                search: state.search_keyword
+            }
+        })
+
+        if (code !== 200) {
+            return {
+                status: code,
+                error: {
+                    errors,
+                    message
+                }
+            }
+        }
+
+        commit('SET_KEYWORDS', data)
+        commit('SET_LOADING_KEYWORD', false)
+        return {
+            error: null,
+            code,
+            message,
+            data
+        }
+    },
 }

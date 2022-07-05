@@ -22,7 +22,7 @@
             @click.stop="
               $baseDialog(
                 'close',
-                'admin-kategori-edit-form-dialog'
+                name
               )
             "
           >
@@ -33,7 +33,7 @@
         <v-container>
           <v-card-title
             class="black--text text-h5 text-center d-flex justify-center align-center"
-            >Edit Kategori</v-card-title
+            >Edit Peraturan</v-card-title
           >
           <validation-observer
             ref="observer"
@@ -44,29 +44,30 @@
             >
               <validation-provider
                 v-slot="{ errors }"
-                name="name"
+                name="content"
                 rules="required"
               >
                 <v-text-field
-                  v-model="form.name"
+                  v-model="
+                    form.content
+                  "
                   :error-messages="
                     errors
                   "
                   light
-                  label="Kategori"
-                  placeholder="Enter kategori"
+                  label="Nama Peraturan"
+                  placeholder="Enter peraturan"
                   outlined
                   required
                 ></v-text-field>
               </validation-provider>
-
               <validation-provider
-                name="keyword"
+                name="kategori_id"
               >
                 <v-autocomplete
-                  v-model="form.keyword"
+                  v-model="form.kategori_id"
                   light                  
-                  :items="keywords"
+                  :items="list_kategori"
                   item-text="name"
                   item-value="id"                 
                   clearable
@@ -74,10 +75,49 @@
                   dense
                   chips
                   small-chips
-                  label="Kategori"
-                  multiple
+                  label="Kategori"                  
                   @focus="reset"
                 ></v-autocomplete>
+              </validation-provider>
+
+              <validation-provider
+                v-slot="{ errors }"
+                name="harga_satuan"
+                rules="required"
+              >
+                <v-text-field
+                  v-model="
+                    form.harga_satuan
+                  "
+                  :error-messages="
+                    errors
+                  "
+                  light
+                  label="Harga Satuan"                  
+                  placeholder="Enter harga satuan"
+                  outlined
+                  required
+                ></v-text-field>
+              </validation-provider>
+
+              <validation-provider
+                v-slot="{ errors }"
+                name="satuan"
+                rules="required"
+              >
+                <v-text-field
+                  v-model="
+                    form.satuan
+                  "
+                  :error-messages="
+                    errors
+                  "
+                  light
+                  label="Satuan"
+                  placeholder="Enter satuan"
+                  outlined
+                  required
+                ></v-text-field>
               </validation-provider>
 
               <div class="d-flex">
@@ -89,11 +129,12 @@
                   type="submit"
                   :disabled="invalid"
                 >
-                  Simpan
+                  Edit
                 </v-btn>
               </div>
             </form>
           </validation-observer>
+        
         </v-container>
       </v-card>
     </base-dialog>
@@ -106,7 +147,7 @@ import {
   mapMutations
 } from 'vuex'
 export default {
-  name: 'AdminKategoriCreateFormDialog',
+  name: 'AdminPeraturanCreateFormDialog',
   props: {
     name: {
       type: String,
@@ -116,22 +157,25 @@ export default {
   },
   data() {
     return {
-      form: {
-        name: '',
-        keyword: []
-      },      
+     form: {
+        content: '',
+        satuan: '',
+        harga_satuan: '',
+        kategori_id: null,        
+      }
     }
   },
-  async fetch() {
-    const res = await this.$store.dispatch('admin/keyword/getNonPaginationKeyword')
-    this.form.keyword = res.data    
-  },
+  // async fetch() {
+  //   await this.$store.dispatch('admin/kategori/getNonPaginationKategori')    
+  //   // this.form.kategori_id = res.data.kategori.id
+  //   // console.log(this.form)
+  // },
   computed: {
-    ...mapState('admin/kategori', {
+    ...mapState('admin/peraturan', {
       detailItem: 'detailItem'
     }),
-    ...mapState('admin/keyword', {
-      keywords: 'nonPaginationItems',
+    ...mapState('admin/kategori', {
+      list_kategori: 'nonPaginationItems',
       loading: 'loading'
     })
   },
@@ -141,18 +185,19 @@ export default {
         {},
         this.detailItem
       )      
+      console.log(this.form)
     }   
   },
   methods: {
-    ...mapMutations('admin/kategori', {
+    ...mapMutations('admin/peraturan', {
       SET_DETAIL_ITEM: 'SET_DETAIL_ITEM'
     }),
     async submit() {
       const res =
         await this.$store.dispatch(
-          'admin/kategori/updateKategori',
+          'admin/peraturan/updatePeraturan',
           {
-            kategoriId: this.form.id,
+            peraturanId: this.form.id,
             payload: Object.assign(
               {},
               this.form
@@ -169,11 +214,11 @@ export default {
         }
       )
       await this.$store.dispatch(
-        'admin/kategori/getKategori'
+        'admin/peraturan/getPeraturan'
       )
       this.$baseDialog(
         'close',
-        'admin-kategori-edit-form-dialog'
+        'admin-peraturan-edit-form-dialog'
       )
     },
     reset() {              

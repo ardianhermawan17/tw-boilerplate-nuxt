@@ -7,7 +7,7 @@ import autoSearchService from '~/service/autoSearch.service'
 
 export default ({ $axios }, inject) => {
     inject('authenticationService', authenticationService($axios, '/api/admin/auth'))
-    inject('autoSearchService', autoSearchService($axios, '/api/peraturan'))
+    inject('autoSearchService', autoSearchService($axios, '/api/auto-search'))
     inject('peraturanService', peraturanService($axios, '/api/admin/peraturan'))
     inject('kategoriService', kategoriService($axios, '/api/admin/kategori'))
     inject('keywordService', keywordService($axios, '/api/admin/keyword'))

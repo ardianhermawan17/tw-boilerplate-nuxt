@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     ...mapMutations('admin/peraturan', {
-      UPDATE_FILTER: 'UPDATE_FILTER'
+      SET_FILTER: 'SET_FILTER'
     }),
     searchItem(query) {
       let search = query
@@ -38,10 +38,13 @@ export default {
         ? (search = null)
         : search
 
-      this.UPDATE_FILTER({
+      this.SET_FILTER({
         ...this.filter,
         search
       })
+      this.$store.dispatch(
+        'admin/peraturan/getPeraturan'
+      )
       // this.fetchAPI()
     }
   }

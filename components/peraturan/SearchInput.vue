@@ -8,6 +8,7 @@
             :outlined="true"
             label="Aturan"
             placeholder="Cari Aturan...."
+            @change="onSearching"
           />
         </v-col>
         <v-col sm="2">
@@ -19,6 +20,7 @@
               width="100%"
               class="px-6 white--text"
               color="light-blue darken-4"
+              @click="onButtonClick"
               >Cari</v-btn
             >
           </div>
@@ -28,4 +30,46 @@
   </div>
 </template>
 
-<script></script>
+<script>
+import { mapState, mapMutations } from 'vuex'
+export default {
+  name: 'PeraturanSearchInput',  
+  computed: {
+    ...mapState('autoSearch', {      
+      search: 'search',      
+      keyword_ids: 'keyword_ids',     
+    }),
+  }, 
+  methods: {    
+    ...mapMutations('autoSearch', {      
+      SET_SEARCH: 'SET_SEARCH',      
+    }),
+    onSearching(query) {      
+       let search = query
+
+      // eslint-disable-next-line no-unused-expressions
+      search === ''
+        ? (search = 'honorium')
+        : search
+
+      this.SET_SEARCH(search)      
+    },
+
+    async onButtonClick() {
+      let res = null
+      if (this.keyword_ids.length > 0) {
+         res = await this.$store.dispatch(
+        'autoSearch/getFilterSearchByKeywordPeraturan'
+      )   
+      }
+      else {
+         res = await this.$store.dispatch(
+         'autoSearch/getFilterSearchPeraturan'
+      )   
+      }
+      console.log(res)
+    }
+  }
+
+}
+</script>

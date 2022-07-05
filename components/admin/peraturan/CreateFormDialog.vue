@@ -22,7 +22,7 @@
             @click.stop="
               $baseDialog(
                 'close',
-                'admin-kategori-create-form-dialog'
+                'admin-peraturan-create-form-dialog'
               )">
             <v-icon>mdi-close</v-icon>
           </v-btn>
@@ -30,7 +30,7 @@
         <v-container>
           <v-card-title
             class="black--text text-h5 text-center d-flex justify-center align-center"
-            >Buat Kategori</v-card-title
+            >Buat Peraturan</v-card-title
           >
           <validation-observer
             ref="observer"
@@ -41,30 +41,30 @@
             >
               <validation-provider
                 v-slot="{ errors }"
-                name="name"
+                name="content"
                 rules="required"
               >
                 <v-text-field
                   v-model="
-                    form.name
+                    form.content
                   "
                   :error-messages="
                     errors
                   "
                   light
-                  label="Nama Kategori"
-                  placeholder="Enter kategori"
+                  label="Nama Peraturan"
+                  placeholder="Enter peraturan"
                   outlined
                   required
                 ></v-text-field>
               </validation-provider>
               <validation-provider
-                name="keyword"
+                name="kategori_id"
               >
                 <v-autocomplete
-                  v-model="form.keyword"
+                  v-model="form.kategori_id"
                   light                  
-                  :items="keywords"
+                  :items="list_kategori"
                   item-text="name"
                   item-value="id"                 
                   clearable
@@ -72,10 +72,50 @@
                   dense
                   chips
                   small-chips
-                  label="Keyword"
-                  multiple
+                  label="Kategori"                  
                   @focus="reset"
                 ></v-autocomplete>
+              </validation-provider>
+
+              <validation-provider
+                v-slot="{ errors }"
+                name="harga_satuan"
+                rules="required"
+              >
+                <v-text-field
+                  v-model="
+                    form.harga_satuan
+                  "
+                  :error-messages="
+                    errors
+                  "
+                  light
+                  label="Harga Satuan"
+                  type="number"
+                  placeholder="Enter harga satuan"
+                  outlined
+                  required
+                ></v-text-field>
+              </validation-provider>
+
+              <validation-provider
+                v-slot="{ errors }"
+                name="satuan"
+                rules="required"
+              >
+                <v-text-field
+                  v-model="
+                    form.satuan
+                  "
+                  :error-messages="
+                    errors
+                  "
+                  light
+                  label="Satuan"
+                  placeholder="Enter satuan"
+                  outlined
+                  required
+                ></v-text-field>
               </validation-provider>
 
               <div class="d-flex">
@@ -101,7 +141,7 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  name: 'AdminKategoriCreateFormDialog',
+  name: 'AdminPeraturanCreateFormDialog',
   props: {
     name: {
       type: String,
@@ -112,17 +152,19 @@ export default {
   data() {
     return {
       form: {
-        name: '',
-        keyword: []
+        content: '',
+        satuan: '',
+        harga_satuan: '',
+        kategori_id: null,        
       }
     }
   },
   async fetch() {
-    await this.$store.dispatch('admin/keyword/getNonPaginationKeyword')     
+    await this.$store.dispatch('admin/kategori/getNonPaginationKategori')     
   },
   computed: {
-    ...mapState('admin/keyword', {
-      keywords: 'nonPaginationItems',
+    ...mapState('admin/kategori', {
+      list_kategori: 'nonPaginationItems',
       loading: 'loading'
     })
   },
@@ -130,7 +172,7 @@ export default {
     async submit() {
       const res =
         await this.$store.dispatch(
-          'admin/kategori/createKategori',
+          'admin/peraturan/createPeraturan',
           this.form
         )      
       if (res.code === 200) {
@@ -144,7 +186,7 @@ export default {
           }
         )
         await this.$store.dispatch(
-          'admin/kategori/getKategori'
+          'admin/peraturan/getPeraturan'
         )
       } else if (res.code !== 200) {
         this.$baseSnackbar(
@@ -159,7 +201,7 @@ export default {
       }
       this.$baseDialog(
         'close',
-        'admin-kategori-create-form-dialog'
+        'admin-peraturan-create-form-dialog'
       )
     },
     reset() {     

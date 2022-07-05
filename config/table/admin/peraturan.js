@@ -2,22 +2,30 @@ export default [{
         text: 'Isi Peraturan',
         align: 'start',
         sortable: false,
-        value: 'regulation',
-        class: 'light-blue darken-4 white--text',
+        value: 'content',
+        class: 'light-blue darken-4 white--text'
     },
     {
         text: 'Kategori',
-        value: 'category',
+        value: 'kategori.name',
         class: 'light-blue darken-4 white--text'
     },
     {
         text: 'Satuan',
-        value: 'unit',
+        value: 'satuan',
         class: 'light-blue darken-4 white--text'
     },
     {
         text: 'Harga Satuan',
-        value: 'unitPrice',
+        value: 'harga_satuan',
         class: 'light-blue darken-4 white--text'
+    },
+    {
+        text: 'Action',
+        sortable: false,
+        value: 'action',
+        width: 160,
+        class: 'light-blue darken-4 white--text text-center',
+        align: 'end'
     }
 ]

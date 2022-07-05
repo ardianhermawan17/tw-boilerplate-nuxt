@@ -24,7 +24,10 @@
       ref="observer"
       v-slot="{ invalid }"
     >
-      <form @submit.prevent="submit">
+      <form
+        @submit.prevent="login"
+        @keyup.enter="login"
+      >
         <validation-provider
           v-slot="{ errors }"
           name="email"
@@ -71,7 +74,15 @@
             type="submit"
             :disabled="invalid"
           >
-            Login
+            <template v-if="loading">
+              <v-progress-circular
+                indeterminate
+                color="white"
+              ></v-progress-circular>
+            </template>
+            <template v-else>
+              Masuk
+            </template>
           </v-btn>
         </div>
       </form>
@@ -90,7 +101,8 @@ export default {
         email: '',
         password: ''
       },
-      passwordFieldType: 'text'
+      passwordFieldType: 'text',
+      loading: false
     }
   },
   computed: {
@@ -102,6 +114,17 @@ export default {
     }
   },
   methods: {
+    login() {
+      this.loading = true
+      this.$auth
+        .loginWith('local', {
+          data: this.credentials
+        })       
+        .catch((error) => {
+          console.log(error.response)
+        })
+      this.loading = false
+    },
     switchVisibility() {
       this.passwordFieldType =
         this.passwordFieldType ===

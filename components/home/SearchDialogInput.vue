@@ -165,7 +165,7 @@ export default {
 
       // eslint-disable-next-line no-unused-expressions
       search === ''
-        ? (search = null)
+        ? (search = 'honorium')
         : search
 
       this.SET_SEARCH(search)

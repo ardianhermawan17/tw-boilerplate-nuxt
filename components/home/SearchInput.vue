@@ -12,12 +12,7 @@
     >
       <div
         slot="toggler"
-        @click.stop="
-          $baseDialog(
-            'open',
-            'home-search-input-dialog'
-          )
-        "
+        @click.stop="openDialog"
       >
         <div
           class="d-flex flex-row justify-center align-center"
@@ -32,8 +27,7 @@
               height="60px"
               append-icon="mdi-magnify"
               label="Aturan"
-              placeholder="Cari Aturan...."
-              @change="onSearching"
+              placeholder="Cari Aturan...."              
             />
           </v-responsive>
         </div>
@@ -45,9 +39,13 @@
 <script>
 export default {
   name: 'HomeSearchInput',
-  methods: {
-    onSearching(data) {
-      console.log(data)
+  methods: {    
+    openDialog() {
+      this.$store.commit('autoSearch/SET_SEARCH', null)
+      this.$baseDialog(
+            'open',
+            'home-search-input-dialog'
+          )
     }
   }
 }

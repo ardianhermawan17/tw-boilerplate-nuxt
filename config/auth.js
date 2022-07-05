@@ -7,9 +7,9 @@ export default {
     ],
     redirect: {
         login: '/auth/login',
-        logout: '/auth/logout',
+        logout: '/',
         callback: '/auth/login',
-        home: '/home'
+        home: '/admin/peraturan'
     },
     rewriteRedirects: true,
     strategies: {
@@ -27,7 +27,7 @@ export default {
             endpoints: {
                 login: { url: '/api/auth/login', method: 'post' },
                 logout: { url: '/api/auth/logout', method: 'get' },
-                user: false
+                user: { url: '/api/auth/get-user', method: 'get' }
             }
         }
     },

@@ -12,6 +12,10 @@ export default [
         path: '~/components/layouts/admin',
         prefix: 'admin-layout'
     },
+    {
+        path: '~/components/layouts/documentation',
+        prefix: 'documentation-layout'
+    },
 
     // Pages components
     {
@@ -42,5 +46,31 @@ export default [
     {
         path: '~/components/admin/keyword',
         prefix: 'admin-keyword'
-    }
+    },
+
+    // Documentation
+    {
+        path: '~/components/documentation',
+        prefix: 'documentation'
+    },
+    {
+        path: '~/components/documentation/auto-search',
+        prefix: 'documentation-auto-search'
+    },
+    {
+        path: '~/components/documentation/authentication',
+        prefix: 'documentation-authentication'
+    },
+    {
+        path: '~/components/documentation/peraturan',
+        prefix: 'documentation-peraturan'
+    },
+    {
+        path: '~/components/documentation/kategori',
+        prefix: 'documentation-kategori'
+    },
+    {
+        path: '~/components/documentation/keyword',
+        prefix: 'documentation-keyword'
+    },
 ]

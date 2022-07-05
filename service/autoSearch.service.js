@@ -5,4 +5,7 @@ export default ($axios, resource) => ({
     getFilterSearchByKeywordPeraturan(filter) {
         return $axios.$get(`${resource}/filter-search-by-keyword/`, filter)
     },
+    getKeywords(filter) {
+        return $axios.$get(`${resource}/keyword/`, filter)
+    },
 })

@@ -9,14 +9,14 @@
         justify="space-between"
       >
         <v-col sm="6" md="6">
-          <AdminPeraturanCreateDialog
-            name="admin-peraturan-create-dialog"
+          <AdminPeraturanCreateFormDialog
+            name="admin-peraturan-create-form-dialog"
           >
             <div
               slot="toggler"
               @click="$baseDialog(
                 'open',
-                'admin-peraturan-create-dialog'
+                'admin-peraturan-create-form-dialog'
               )"
             >
               <v-btn color="green">
@@ -26,16 +26,15 @@
                 Buat Peraturan
               </v-btn>
             </div>
-          </AdminPeraturanCreateDialog>
+          </AdminPeraturanCreateFormDialog>
         </v-col>
         <v-col sm="6" md="6">
           <v-row>
+          <v-col cols="2"></v-col>
+            
             <v-col sm="10"
               ><AdminPeraturanSearchInput />
-            </v-col>
-            <v-col sm="2">
-              <AdminPeraturanFilterButton />
-            </v-col>
+            </v-col>        
           </v-row>
         </v-col>
       </v-row>

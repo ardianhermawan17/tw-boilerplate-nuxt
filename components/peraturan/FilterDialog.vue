@@ -18,13 +18,7 @@
             color
             class="red"
             x-small
-            @click.stop="
-              $baseDialog(
-                'close',
-                'peraturan-filter-dialog'
-              )
-            "
-          >
+            @click.stop="onCloseDialog">
             <v-icon>mdi-close</v-icon>
           </v-btn>
         </v-toolbar>
@@ -36,8 +30,9 @@
             :is-neumorphism="false"
             :outlined="true"
             append-icon="mdi-magnify"
-            label="Kategori"
-            placeholder="Cari kategori...."
+            label="Keyword"
+            placeholder="Cari Keyword...."
+            @change="onSearching"
           />
 
           <!-- Title kategori  -->
@@ -45,15 +40,13 @@
             class="d-flex justify-space-between py-6"
           >
             <p class="black--text">
-              Total kategori yang
-              dipilih :
-              {{
-                chosenCategory.length
-              }}
+              Total keyword yang dipilih
+              :
+              {{ chosenKeyword.length }}
             </p>
             <base-button
               v-show="
-                chosenCategory.length
+                chosenKeyword.length
               "
               size="s"
             >
@@ -82,20 +75,30 @@
               max-height="400"
               class="overflow-y-auto"
             >
-              <v-layout column>
+            <base-card
+            v-if="!loading && keywords.length === 0"
+              size="s"
+              class-name="my-6 mx-4"
+            >
+              <v-card-title                
+                class="light-blue--text text--darken-4 font-weight-bold d-flex justify-center"
+                >Peraturan tidak ditemukan
+              </v-card-title>  
+            </base-card>
+              <v-layout v-if="!loading" column>
                 <div
-                  v-for="category in listCategory"
-                  :key="category.id"
+                  v-for="keyword in keywords"
+                  :key="keyword.id"
                   :class="
                     cardOrderClass(
-                      category
+                      keyword
                     )
                   "
                 >
                   <div
                     @click="
                       onClickFilter(
-                        category
+                        keyword
                       )
                     "
                   >
@@ -103,7 +106,7 @@
                       size="s"
                       :color="
                         cardColorChanged(
-                          category.id
+                          keyword.id
                         )
                       "
                       class-name="px-4 my-6 mx-4"
@@ -116,7 +119,7 @@
                           <v-card-title
                             :class="
                               textTitleColorChanged(
-                                category.id
+                                keyword.id
                               )
                             "
                             >Nama :
@@ -124,12 +127,12 @@
                           <v-card-text
                             :class="
                               textColorChanged(
-                                category.id
+                                keyword.id
                               )
                             "
                           >
                             {{
-                              category.name
+                              keyword.name
                             }}
                           </v-card-text>
                         </v-col>
@@ -140,7 +143,7 @@
                           <v-card-title
                             :class="
                               textTitleColorChanged(
-                                category.id
+                                keyword.id
                               )
                             "
                             >Total
@@ -149,12 +152,12 @@
                           <v-card-text
                             :class="
                               textColorChanged(
-                                category.id
+                                keyword.id
                               )
                             "
                           >
                             {{
-                              category.totalPeraturan
+                              keyword.total_peraturan
                             }}
                           </v-card-text>
                         </v-col>
@@ -172,7 +175,7 @@
                               :class="[
                                 'px-2 py-2 ' +
                                   buttonColorChanged(
-                                    category.id
+                                    keyword.id
                                   )
                               ]"
                             ></v-btn>
@@ -183,6 +186,14 @@
                   </div>
                 </div>
               </v-layout>
+               <v-skeleton-loader
+                v-else
+                :loading="loading"
+                elevation="0"
+                light
+                type="article"
+              ></v-skeleton-loader>
+            </base-card>
             </v-responsive>
           </v-card>
         </v-container>
@@ -193,87 +204,108 @@
 
 <script>
 import _ from 'lodash'
+import {
+  mapState,
+  mapMutations
+} from 'vuex'
 
 export default {
-  name: 'PeraturanFilterDialog',
+  name: 'PeraturanAutoSearchFilterDialog',
   props: {
     name: {
       type: String,
       default: () =>
-        'search-dialog-input'
+        'peraturan-dialog-input'
     }
   },
   data() {
     return {
-      chosenCategory: [
-        {
-          id: 1,
-          name: 'Honorium Method',
-          totalPeraturan: 90
-        },
-        {
-          id: 2,
-          name: 'Honorium Console',
-          totalPeraturan: 10
-        }
-      ],
-      listCategory: [
-        {
-          id: 1,
-          name: 'Honorium Method',
-          totalPeraturan: 90
-        },
-        {
-          id: 2,
-          name: 'Honorium Console',
-          totalPeraturan: 10
-        },
-        {
-          id: 3,
-          name: 'Honorium Tempekalan',
-          totalPeraturan: 70
-        },
-        {
-          id: 4,
-          name: 'Honorium',
-          totalPeraturan: 70
-        },
-        {
-          id: 5,
-          name: 'Honorium',
-          totalPeraturan: 70
-        }
-      ]
+      chosenKeyword: [],      
+    }
+  }, 
+  computed: {
+    ...mapState('autoSearch', {
+      keywords: 'keywords',
+      loading: 'loading_keyword',
+      keyword_ids: 'keyword_ids',
+    })
+  },
+  watch: {
+    keyword_ids(value){
+      console.log(value)   
+      this.fetchAPI()   
     }
   },
   methods: {
-    onClickResetFilter() {
-      this.chosenCategory.splice(
-        0,
-        this.chosenCategory.length
-      )
+    ...mapMutations('autoSearch', {
+      SET_KEYWORDS: 'SET_KEYWORDS',
+      SET_SEARCH_KEYWORD: 'SET_SEARCH_KEYWORD',
+      SET_KEYWORD_IDS: 'SET_KEYWORD_IDS'
+    }),
+    async fetchAPI() {
+      let res = null
+      if (this.keyword_ids.length > 0) {
+         res = await this.$store.dispatch(
+        'autoSearch/getFilterSearchByKeywordPeraturan'
+      )   
+      }
+      else {
+         res = await this.$store.dispatch(
+         'autoSearch/getFilterSearchPeraturan'
+      )   
+      }
+      console.log(res)
     },
-    onClickFilter(category) {
+    onCloseDialog() {      
+      this.$baseDialog(
+                'close',
+                'peraturan-filter-dialog'
+              )
+     },
+    async onSearching(query) {      
+      let search = query
+
+      // eslint-disable-next-line no-unused-expressions
+      search === ''
+        ? (search = null)
+        : search
+
+      this.SET_SEARCH_KEYWORD(search)
+      await this.$store.dispatch(
+        'autoSearch/getKeywords'
+      )      
+    },
+    onClickResetFilter() {
+      this.chosenKeyword.splice(
+        0,
+        this.chosenKeyword.length
+      )
+      this.SET_KEYWORD_IDS([])
+    },
+    onClickFilter(keyword) {
       const index = _.findIndex(
-        this.chosenCategory,
-        category
+        this.chosenKeyword,
+        keyword
       )
       if (index !== -1) {
-        this.chosenCategory.splice(
+        this.chosenKeyword.splice(
           index,
           1
         )
-        // this.chosenCategory = Object.assign({}, this.chosenCategory.splice(index, 1))
+        // this.chosenKeyword = Object.assign({}, this.chosenKeyword.splice(index, 1))
       } else {
-        this.chosenCategory.push(
-          category
-        )
-      }
+        this.chosenKeyword.push(keyword)        
+      }      
+
+      const filter = this.chosenKeyword.map(value => {
+            return value.id
+      })
+      this.SET_KEYWORD_IDS(filter)      
     },
-    cardOrderClass(category) {
+    cardOrderClass(keyword) {
       const index = _.findIndex(
-        this.chosenCategory,
-        category
+        this.chosenKeyword,
+        keyword
       )
       return index !== -1
         ? 'order-first'
@@ -281,7 +313,7 @@ export default {
     },
     textTitleColorChanged(id) {
       const css =
-        this.chosenCategory.find(
+        this.chosenKeyword.find(
           (data) => data.id === id
         )
       return css !== undefined
@@ -290,7 +322,7 @@ export default {
     },
     textColorChanged(id) {
       const css =
-        this.chosenCategory.find(
+        this.chosenKeyword.find(
           (data) => data.id === id
         )
       return css !== undefined
@@ -299,7 +331,7 @@ export default {
     },
     cardColorChanged(id) {
       const css =
-        this.chosenCategory.find(
+        this.chosenKeyword.find(
           (data) => data.id === id
         )
       return css !== undefined
@@ -308,7 +340,7 @@ export default {
     },
     buttonColorChanged(id) {
       const css =
-        this.chosenCategory.find(
+        this.chosenKeyword.find(
           (data) => data.id === id
         )
       return css !== undefined
