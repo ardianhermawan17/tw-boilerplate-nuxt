@@ -2,7 +2,7 @@
   <v-container>
     <base-card
       size="l"
-      color="blue lighten-5"
+      :color="colorCard(data.type)"
       class-name="my-6 mx-4"
     >
       <section class="py-4">
@@ -174,6 +174,20 @@ export default {
           return 'error'
         default:
           return 'success'
+      }
+      },
+      colorCard(type) {
+        switch (type) {
+        case 'GET':
+          return 'blue lighten-5'
+        case 'POST':
+          return 'green lighten-4'
+        case 'PUT':
+          return 'yellow lighten-3'
+        case 'DELETE':
+          return 'red lighten-5'
+        default:
+          return 'green lighten-4'
       }
     }
   }

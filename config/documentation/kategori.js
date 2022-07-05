@@ -1,12 +1,12 @@
 const body = {
     store: `{
         "name": String,
-        "keyword": Array
-    }`,
+        "keyword": Array[integer]
+            }`,
     update: `{
         "name": String,
-        "keyword": Array
-    }`
+        "keyword": Array[integer]
+     }`
 }
 
 const response = {
