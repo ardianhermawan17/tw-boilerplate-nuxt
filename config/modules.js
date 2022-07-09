@@ -8,5 +8,7 @@ export default [
     // https://image.nuxtjs.org/
     // '@nuxt/image', // error because SSr
     // https://github.com/nuxt-community/universal-storage-module/
-    '@nuxtjs/universal-storage'
+    '@nuxtjs/universal-storage',
+
+    '@nuxtjs/proxy'
 ]
