@@ -13,7 +13,8 @@
         >
           <div
             slot="toggler"
-            @click="openDialog">
+            @click="openDialog"
+          >
             <base-card
               class-name="d-flex justify-center align-center py-1"
             >
@@ -43,9 +44,15 @@
     </v-responsive>
     <v-responsive
       v-else
-      max-height="500"      
+      max-height="500"
     >
-      <h4 v-if="!loading" class="black--text text-weight-bold">Jumlah Peraturan : {{ list_peraturan.length }}</h4>
+      <h4
+        v-if="!loading"
+        class="black--text text-weight-bold"
+      >
+        Jumlah Peraturan :
+        {{ list_peraturan.length }}
+      </h4>
       <base-card
         size="s"
         class-name="my-6 mx-4"
@@ -67,7 +74,7 @@
         ></v-skeleton-loader>
       </base-card>
       <v-card
-        v-if="!loading"
+        v-if="!loading && list_peraturan.length !== 0"
         elevation="0"
         class="mx-auto px-4 py-4 blue-grey lighten-5"
         light
@@ -134,19 +141,25 @@
 import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'PeraturanListData',
-  async fetch() {
-    this.SET_SEARCH('honorium')
-    await this.$store.dispatch(
-        'autoSearch/getFilterSearchPeraturan'
-      ) 
-  },
+  // async fetch() {
+  //   this.SET_SEARCH('honorium')
+  //   await this.$store.dispatch(
+  //       'autoSearch/getFilterSearchPeraturan'
+  //     )
+  // },
   computed: {
     ...mapState('autoSearch', {
       list_peraturan: 'items',
       search: 'search',
       loading: 'loading'
     })
-  }, 
+  },
+   mounted() {
+    this.SET_SEARCH('')
+    this.$store.dispatch(
+        'autoSearch/getFilterSearchPeraturan'
+      )
+  },
   methods: {
     ...mapMutations('autoSearch', {
       SET_SEARCH: 'SET_SEARCH'
@@ -154,7 +167,7 @@ export default {
     async openDialog() {
       await this.$store.dispatch(
         'autoSearch/getKeywords'
-      ) 
+      )
       this.$baseDialog(
                 'open',
                 'peraturan-filter-dialog'

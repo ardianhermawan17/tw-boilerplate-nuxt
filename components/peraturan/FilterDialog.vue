@@ -232,7 +232,6 @@ export default {
   },
   watch: {
     keyword_ids(value){
-      console.log(value)   
       this.fetchAPI()   
     }
   },
@@ -243,18 +242,16 @@ export default {
       SET_KEYWORD_IDS: 'SET_KEYWORD_IDS'
     }),
     async fetchAPI() {
-      let res = null
       if (this.keyword_ids.length > 0) {
-         res = await this.$store.dispatch(
+        await this.$store.dispatch(
         'autoSearch/getFilterSearchByKeywordPeraturan'
       )   
       }
       else {
-         res = await this.$store.dispatch(
+         await this.$store.dispatch(
          'autoSearch/getFilterSearchPeraturan'
       )   
       }
-      console.log(res)
     },
     onCloseDialog() {      
       this.$baseDialog(

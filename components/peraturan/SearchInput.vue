@@ -52,7 +52,7 @@ export default {
 
       // eslint-disable-next-line no-unused-expressions
       search === ''
-        ? (search = 'honorium')
+        ? (search = '')
         : search
 
       this.SET_SEARCH(search)
@@ -61,6 +61,8 @@ export default {
     async onButtonClick() {
       let res = null
       if (this.keyword_ids.length > 0) {
+
+      this.SET_SEARCH(this.search === '' || this.search === null ? ' ' : this.search)
         res =
           await this.$store.dispatch(
             'autoSearch/getFilterSearchByKeywordPeraturan'
