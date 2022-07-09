@@ -1,3 +1,3 @@
 export default {
-    baseURL: 'http://backend-autofintion.microlance.id/'
+    baseURL: 'https://backend-autofintion.microlance.id/'
 }
