@@ -1,4 +1,3 @@
 export default {
-    baseURL: 'https://backend-autofintion.microlance.id/',
-    proxy: true
+    baseURL: 'https://backend-autofintion.microlance.id/'
 }
