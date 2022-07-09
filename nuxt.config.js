@@ -16,6 +16,7 @@ import pwa from './config/pwa'
 import googleFonts from './config/googleFonts'
 import i18n from './config/i18n'
 import modules from './config/modules'
+import proxy from './config/proxy'
 // import image from './config/image'
 import storage from './config/storage'
 import privateRuntimeConfig from './config/privateRuntimeConfig'
@@ -72,6 +73,9 @@ export default {
 
     // Universal Storage module configuration: https://github.com/nuxt-community/universal-storage-module#usage
     storage,
+
+    // https: //axios.nuxtjs.org/options/#proxy
+    proxy,
 
     // Nuxt image module configuration: https://image.nuxtjs.org
     // image,
