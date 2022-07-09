@@ -1,6 +1,6 @@
 export default {
     '/api/': {
-        target: 'https: //backend-autofintion.microlance.id/',
+        target: 'https://backend-autofintion.microlance.id/',
         pathRewrite: { '^/api/': '' },
         changeOrigin: true
     }
