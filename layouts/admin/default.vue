@@ -1,5 +1,6 @@
 <template>
   <v-app id="inspire">
+    <base-snackbar name="admin-snackbar" />
     <AdminLayoutNavigationDrawer />
 
     <v-app-bar app light>
@@ -58,7 +59,6 @@
     </v-app-bar>
 
     <v-main class="grey lighten-3">
-     <base-snackbar name="admin-snackbar" />
       <v-container
         fluid
         class="px-0 py-0 blue-grey lighten-5"
@@ -105,7 +105,16 @@ export default {
       UPDATE_DRAWER: 'UPDATE_DRAWER'
     }),
     logout() {
-            this.$auth.logout()            
+      this.$auth.logout()      
+            this.$baseSnackbar(
+          'admin-snackbar',
+          {
+            title: 'Success',
+            text: 'Logout Successfully',
+            color: 'success',
+            duration: 3000
+          }
+        )      
         }
   }
 }

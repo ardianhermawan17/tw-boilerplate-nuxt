@@ -52,7 +52,7 @@
         !item.icon &&
         item.text &&
         item.title">
-      <v-tooltip right>      
+      <v-tooltip right :color="colorTooltip(item.text)">      
         <template
           v-slot:activator="{ on,attrs}">          
           <v-row
@@ -75,7 +75,7 @@
             </v-col>
           </v-row>
         </template>
-        <span>{{ item.tooltip ? item.tooltip : item.title }}</span>
+        <span >{{ item.tooltip ? item.tooltip : item.title }}</span>
       </v-tooltip>
     </v-list-item-content>
   </v-list-item>
@@ -111,6 +111,20 @@ export default {
           return 'warning--text'
         case 'DELETE':
           return 'error--text'
+        default:
+          return 'success'
+      }
+    },
+    colorTooltip(type) {
+      switch (type) {
+        case 'GET':
+          return 'primary'
+        case 'POST':
+          return 'success'
+        case 'PUT':
+          return 'warning'
+        case 'DELETE':
+          return 'error'
         default:
           return 'success'
       }

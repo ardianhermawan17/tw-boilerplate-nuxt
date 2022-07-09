@@ -5,12 +5,12 @@ export default [{
         value: 'name',
         class: 'light-blue darken-4 white--text'
     },
-    {
-        text: 'Total Search',
-        value: 'total_search',
-        sortable: false,
-        class: 'light-blue darken-4 white--text'
-    },
+    // {
+    //     text: 'Total Search',
+    //     value: 'total_search',
+    //     sortable: false,
+    //     class: 'light-blue darken-4 white--text'
+    // },
     {
         text: 'Keyword',
         sortable: false,

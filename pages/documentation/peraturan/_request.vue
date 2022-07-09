@@ -147,8 +147,7 @@ export default {
     // this.renderedParameters()
     this.data = _.cloneDeep(
       this.renderedData()
-      )
-    console.log(this.data.response.success.code)
+      )    
   },
   methods: {
     renderedData() {

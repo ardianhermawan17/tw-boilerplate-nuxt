@@ -45,6 +45,7 @@
       v-else
       max-height="500"      
     >
+      <h4 v-if="!loading" class="black--text text-weight-bold">Jumlah Peraturan : {{ list_peraturan.length }}</h4>
       <base-card
         size="s"
         class-name="my-6 mx-4"

@@ -127,7 +127,7 @@
 
 <script>
 import _ from 'lodash'
-import data from '~/config/documentation/kategori'
+import data from '~/config/documentation/auth'
 
 export default {
   name: 'DocumentationRequest',

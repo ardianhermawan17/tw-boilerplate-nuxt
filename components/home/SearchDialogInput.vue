@@ -63,6 +63,7 @@
               class="mx-auto px-4 py-4 blue-grey lighten-5"
               light
             >
+            <h4 v-if="!loading" class="black--text text-weight-bold">Jumlah Peraturan : {{ list_peraturan.length }}</h4>
               <v-responsive
                 max-height="400"
                 class="overflow-y-auto"

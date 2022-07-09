@@ -18,10 +18,10 @@ export default [
     },
 
     // Pages components
-    {
-        path: '~/components/dashboard',
-        prefix: 'dashboard'
-    },
+    // {
+    //     path: '~/components/dashboard',
+    //     prefix: 'dashboard'
+    // },
     {
         path: '~/components/home',
         prefix: 'home'
@@ -53,24 +53,24 @@ export default [
         path: '~/components/documentation',
         prefix: 'documentation'
     },
-    {
-        path: '~/components/documentation/auto-search',
-        prefix: 'documentation-auto-search'
-    },
-    {
-        path: '~/components/documentation/authentication',
-        prefix: 'documentation-authentication'
-    },
-    {
-        path: '~/components/documentation/peraturan',
-        prefix: 'documentation-peraturan'
-    },
-    {
-        path: '~/components/documentation/kategori',
-        prefix: 'documentation-kategori'
-    },
-    {
-        path: '~/components/documentation/keyword',
-        prefix: 'documentation-keyword'
-    },
+    // {
+    //     path: '~/components/documentation/auto-search',
+    //     prefix: 'documentation-auto-search'
+    // },
+    // {
+    //     path: '~/components/documentation/authentication',
+    //     prefix: 'documentation-authentication'
+    // },
+    // {
+    //     path: '~/components/documentation/peraturan',
+    //     prefix: 'documentation-peraturan'
+    // },
+    // {
+    //     path: '~/components/documentation/kategori',
+    //     prefix: 'documentation-kategori'
+    // },
+    // {
+    //     path: '~/components/documentation/keyword',
+    //     prefix: 'documentation-keyword'
+    // },
 ]

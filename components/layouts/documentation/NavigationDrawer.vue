@@ -64,25 +64,28 @@ export default {
       drawerImage: false,
       mini: true,
       items: [
-         {
+        {
           title: 'Auto Search',
           icon: 'mdi-clipboard-text-search',
-          group: '/documentation/auto-search',
+          group:
+            '/documentation/auto-search',
           children: [
             {
-              title: 'Get Keyword',
-              text: 'GET',
-              to: 'get-keyword'
-            },
-            {
               title: 'Auto Search',
-              tooltip: 'Get Peraturan Auto Search',
+              tooltip:
+                'Get Peraturan Auto Search',
               text: 'GET',
               to: 'filter-search'
             },
             {
+              title: 'Get Keyword',
+              text: 'GET',
+              to: 'keyword'
+            },
+            {
               title: 'Filter Search ',
-              tooltip: 'Get Peraturan With Filtered Search',
+              tooltip:
+                'Get Peraturan With Filtered Search',
               text: 'GET',
               to: 'filter-search-by-keyword'
             }
@@ -97,6 +100,11 @@ export default {
               title: 'Login API',
               text: 'POST',
               to: 'login'
+            },
+            {
+              title: 'Get User',
+              text: 'GET',
+              to: 'get-user'
             },
             {
               title: 'Logout API',
@@ -188,6 +196,11 @@ export default {
               to: 'delete'
             }
           ]
+        },
+        {
+          title: 'Admin',
+          icon: 'mdi-application-cog-outline',
+          to: '/admin/'
         }
       ]
     }

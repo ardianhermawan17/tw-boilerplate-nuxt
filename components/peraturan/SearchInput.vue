@@ -31,45 +31,50 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import {
+  mapState,
+  mapMutations
+} from 'vuex'
 export default {
-  name: 'PeraturanSearchInput',  
+  name: 'PeraturanSearchInput',
   computed: {
-    ...mapState('autoSearch', {      
-      search: 'search',      
-      keyword_ids: 'keyword_ids',     
+    ...mapState('autoSearch', {
+      search: 'search',
+      keyword_ids: 'keyword_ids'
+    })
+  },
+  methods: {
+    ...mapMutations('autoSearch', {
+      SET_SEARCH: 'SET_SEARCH'
     }),
-  }, 
-  methods: {    
-    ...mapMutations('autoSearch', {      
-      SET_SEARCH: 'SET_SEARCH',      
-    }),
-    onSearching(query) {      
-       let search = query
+    onSearching(query) {
+      let search = query
 
       // eslint-disable-next-line no-unused-expressions
       search === ''
         ? (search = 'honorium')
         : search
 
-      this.SET_SEARCH(search)      
+      this.SET_SEARCH(search)
     },
 
     async onButtonClick() {
       let res = null
       if (this.keyword_ids.length > 0) {
-         res = await this.$store.dispatch(
-        'autoSearch/getFilterSearchByKeywordPeraturan'
-      )   
-      }
-      else {
-         res = await this.$store.dispatch(
-         'autoSearch/getFilterSearchPeraturan'
-      )   
+        res =
+          await this.$store.dispatch(
+            'autoSearch/getFilterSearchByKeywordPeraturan'
+          )
+        console.log('one')
+      } else {
+        res =
+          await this.$store.dispatch(
+            'autoSearch/getFilterSearchPeraturan'
+          )
+        console.log('two')
       }
       console.log(res)
     }
   }
-
 }
 </script>

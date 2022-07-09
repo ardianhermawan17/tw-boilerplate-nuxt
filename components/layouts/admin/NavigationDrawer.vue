@@ -44,11 +44,11 @@ export default {
       drawerImage: false,
       mini: true,
       items: [
-        {
-          title: 'Dashboard',
-          icon: 'mdi-view-dashboard',
-          to: '/admin/dashboard'
-        },
+        // {
+        //   title: 'Dashboard',
+        //   icon: 'mdi-view-dashboard',
+        //   to: '/admin/dashboard'
+        // },
         {
           title: 'Peraturan',
           icon: 'mdi-gavel',
@@ -63,6 +63,11 @@ export default {
           title: 'Keyword',
           icon: 'mdi-file-key',
           to: '/admin/keyword'
+        },
+         {
+          title: 'Documentation API',
+          icon: 'mdi-cloud-print',
+          to: '/documentation'
         }
       ]
     }

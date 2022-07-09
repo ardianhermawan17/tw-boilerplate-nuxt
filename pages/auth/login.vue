@@ -119,11 +119,32 @@ export default {
       this.$auth
         .loginWith('local', {
           data: this.credentials
+        })
+        .then(() => {
+          this.$baseSnackbar(
+          'auth-snackbar',
+          {
+            title: 'Success',
+            text: 'Login Successfully',
+            color: 'success',
+            duration: 3000
+          }
+        )
         })       
         .catch((error) => {
-          console.log(error.response)
+          this.$baseSnackbar(
+          'auth-snackbar',
+          {
+            title: 'Error',
+            text: error.response,
+            color: 'error',
+            duration: 3000
+          }
+        )
+          // console.log(error.response)
         })
-      this.loading = false
+        
+        this.loading = false
     },
     switchVisibility() {
       this.passwordFieldType =

@@ -11,16 +11,18 @@
     <div
       class="d-flex justify-center align-center mb-8"
     >
-      <!-- <v-btn
+      <v-btn
+        nuxt
         depressed
         class="px-6 white--text"
         color="light-blue darken-4"
+        to="/peraturan"
         >Klik Disini</v-btn
-      > -->
-      <HomeSearchDialog />
+      >
+      <!-- <HomeSearchDialog /> -->
       <!-- TODO :: Kek ono link  -->
     </div>
-    <v-row justify="space-between">
+    <!-- <v-row justify="space-between">
       <v-col lg="5" sm="12">
         <base-card class="py-2">
           <v-card-title
@@ -50,13 +52,15 @@
         </base-card>
       </v-col>
     </v-row>
-    <!-- CHART -->
+
+    // Chart    
     <div class="mt-12">
       <base-card
         color="light-blue darken-4"
       >
         <base-bar-chart />
       </base-card>
-    </div>
+    </div> -->
+
   </section>
 </template>

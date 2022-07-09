@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <v-main class="grey lighten-3">
+    <base-snackbar name="auth-snackbar" />
       <v-container
         fluid
         class="px-0 py-0 blue-grey lighten-5 min-height-100 d-flex justify-center align-center"
