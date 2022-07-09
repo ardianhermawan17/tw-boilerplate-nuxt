@@ -250,7 +250,8 @@ export default {
       else {
          await this.$store.dispatch(
          'autoSearch/getFilterSearchPeraturan'
-      )   
+        )   
+      
       }
     },
     onCloseDialog() {      
