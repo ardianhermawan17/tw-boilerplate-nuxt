@@ -4,5 +4,5 @@ export default {
     //     // ws: false
     //     changeOrigin: true
     // }
-    '/api/': 'https://backend-autofintion.microlance.id/'
+    // '/api/': 'https://backend-autofintion.microlance.id/'
 }
