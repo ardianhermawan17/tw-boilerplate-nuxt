@@ -10,5 +10,5 @@ export default [
     // https://github.com/nuxt-community/universal-storage-module/
     '@nuxtjs/universal-storage',
 
-    '@nuxtjs/proxy'
+    // '@nuxtjs/proxy'
 ]
