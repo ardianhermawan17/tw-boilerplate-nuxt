@@ -4,5 +4,5 @@ export default {
     // common: {
     //     'Accept': 'application/json, text/plain, */*'
     // },
-    proxy: true
+    // proxy: true
 }
