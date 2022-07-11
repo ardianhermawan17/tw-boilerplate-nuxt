@@ -19,8 +19,8 @@ import modules from './config/modules'
 import proxy from './config/proxy'
 // import image from './config/image'
 import storage from './config/storage'
-import privateRuntimeConfig from './config/privateRuntimeConfig'
-import publicRuntimeConfig from './config/publicRuntimeConfig'
+// import privateRuntimeConfig from './config/privateRuntimeConfig'
+// import publicRuntimeConfig from './config/publicRuntimeConfig'
 
 export default {
     // Global page headers: https://go.nuxtjs.dev/config-head
@@ -92,9 +92,9 @@ export default {
     vuetify,
 
     // // Runtime Configuration: https://nuxtjs.org/docs/2.x/directory-structure/nuxt-config#publicruntimeconfig
-    publicRuntimeConfig,
+    // publicRuntimeConfig,
 
     // // Runtime Configuration: https://nuxtjs.org/docs/2.x/directory-structure/nuxt-config#privateruntimeconfig
-    privateRuntimeConfig
+    // privateRuntimeConfig
 
 }
