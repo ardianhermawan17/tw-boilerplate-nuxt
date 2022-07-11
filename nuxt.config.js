@@ -19,6 +19,7 @@ import modules from './config/modules'
 import proxy from './config/proxy'
 // import image from './config/image'
 import storage from './config/storage'
+import env from './config/env'
 // import privateRuntimeConfig from './config/privateRuntimeConfig'
 // import publicRuntimeConfig from './config/publicRuntimeConfig'
 
@@ -33,6 +34,8 @@ export default {
     // render: {
     //     resourceHints: false
     // },
+
+    env,
 
     // Auto import components: https://go.nuxtjs.dev/config-components
     components,

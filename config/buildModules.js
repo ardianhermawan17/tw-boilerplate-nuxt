@@ -7,4 +7,6 @@ export default [
     '@nuxtjs/moment',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+
+    '@nuxtjs/dotenv',
 ]
