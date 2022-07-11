@@ -30,9 +30,9 @@ export default {
     css,
 
     // Disable Preload
-    render: {
-        resourceHints: false
-    },
+    // render: {
+    //     resourceHints: false
+    // },
 
     // Auto import components: https://go.nuxtjs.dev/config-components
     components,
