@@ -29,6 +29,11 @@ export default {
     // Global CSS: https://go.nuxtjs.dev/config-css
     css,
 
+    // Disable Preload
+    render: {
+        resourceHints: false
+    },
+
     // Auto import components: https://go.nuxtjs.dev/config-components
     components,
 
