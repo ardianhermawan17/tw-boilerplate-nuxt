@@ -364,10 +364,10 @@ const response = {
 }
 
 export default [{
-        name: 'kategori',
+        name: 'peraturan',
         type: 'GET',
-        description: 'Return all kategori with or without pagination ',
-        groupRoute: '/api/kategori/',
+        description: 'Return all peraturan with or without pagination ',
+        groupRoute: '/api/peraturan/',
         isLogin: true,
         route: 'get',
         parameters: {
