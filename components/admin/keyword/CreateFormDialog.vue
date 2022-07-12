@@ -119,7 +119,7 @@ export default {
     }
   },
    async fetch() {
-    await this.$store.dispatch('admin/kategori/getNonPaginationKategori')     
+    await this.$store.dispatch('admin/kategori/getNonPaginationKategori')    
   },
   computed: {
     ...mapState('admin/kategori', {

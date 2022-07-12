@@ -1,3 +1,1 @@
-export default {
-    target: 'server'
-}
+export default 'server'

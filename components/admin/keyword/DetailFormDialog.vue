@@ -94,11 +94,11 @@
                     </template>
                     <span>{{ key.name }}</span>
                   </v-tooltip>
-                   
                   </div>
                 </div>
               </v-list-item-content>
             </v-list-item>
+
           </v-list>
         </v-container>
       </v-card>

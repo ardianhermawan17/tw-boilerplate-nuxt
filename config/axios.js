@@ -1,8 +1,8 @@
 export default {
     //  When using proxy dont user baseURL
-    // baseURL: 'https://backend-autofintion.microlance.id',
+    baseURL: 'http://127.0.0.1:8000',
     // common: {
     //     'Accept': 'application/json, text/plain, */*'
     // },
-    proxy: true
+    // proxy: true
 }

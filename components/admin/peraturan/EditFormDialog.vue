@@ -165,11 +165,12 @@ export default {
       }
     }
   },
-  // async fetch() {
-  //   await this.$store.dispatch('admin/kategori/getNonPaginationKategori')    
-  //   // this.form.kategori_id = res.data.kategori.id
-  //   // console.log(this.form)
-  // },
+  async fetch() {
+    const res = await this.$store.dispatch('admin/kategori/getNonPaginationKategori')    
+    this.form.kategori_id = res.data.kategori.id
+    console.log(this.detailItem)
+    console.log(this.form)
+  },
   computed: {
     ...mapState('admin/peraturan', {
       detailItem: 'detailItem'
@@ -184,8 +185,7 @@ export default {
       this.form = Object.assign(
         {},
         this.detailItem
-      )      
-      console.log(this.form)
+      ) 
     }   
   },
   methods: {

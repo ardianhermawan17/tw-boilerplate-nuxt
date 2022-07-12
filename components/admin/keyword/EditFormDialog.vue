@@ -3,6 +3,7 @@
     <slot name="toggler" />
     <base-dialog :name="name">
       <v-card
+       v-if="!loading"
         class="blue-grey lighten-5"
       >
         <v-toolbar
@@ -32,7 +33,7 @@
         <v-container>
           <v-card-title
             class="black--text text-h5 text-center d-flex justify-center align-center"
-            >Edit Kategori</v-card-title
+            >Edit Keyword</v-card-title
           >
           <validation-observer
             ref="observer"
@@ -59,6 +60,26 @@
                   outlined
                   required
                 ></v-text-field>
+              </validation-provider>
+
+              <validation-provider
+                name="kategori"
+              >
+                <v-autocomplete
+                  v-model="form.kategori"
+                  light                  
+                  :items="list_kategori"
+                  item-text="name"
+                  item-value="id"                 
+                  clearable
+                  outlined
+                  dense
+                  chips
+                  small-chips
+                  label="Kategori"
+                  multiple
+                  @focus="reset"
+                ></v-autocomplete>
               </validation-provider>
 
               <div class="d-flex">
@@ -103,10 +124,18 @@ export default {
       }
     }
   },
+  async fetch() {
+    const res = await this.$store.dispatch('admin/kategori/getNonPaginationKategori')
+    this.form.kategori = res.data    
+  },
   computed: {
     ...mapState('admin/keyword', {
       detailItem: 'detailItem'
-    })
+    }),
+    ...mapState('admin/kategori', {
+      list_kategori: 'nonPaginationItems',
+      loading: 'loading'
+    }),
   },
   watch: {
     detailItem(value) {      
@@ -149,7 +178,10 @@ export default {
         'close',
         this.name
       )
-    }
+    },
+    reset() {              
+        this.$refs.observer.reset()
+      },
   }
 }
 </script>

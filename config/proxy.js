@@ -3,7 +3,7 @@ export default {
     //     target: 'https://backend-autofintion.microlance.id/',
     //     // pathRewrite: { "^/api/": "" },
     //     // ws: false
-    //     changeOrigin: true
+    //     // changeOrigin: true
     // },
     // 'https://autofintion.vercel.app/api/': {
     //     target: 'https://backend-autofintion.microlance.id/',
@@ -11,7 +11,7 @@ export default {
     //     // ws: false
     //     changeOrigin: true
     // }
-    '/api/': {
-        target: process.env.baseURL
-    }
+    // '/api/': {
+    //     target: process.env.baseURL
+    // }
 }

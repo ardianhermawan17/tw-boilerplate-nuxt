@@ -1,6 +1,6 @@
 export default {
     axios: {
-        baseURL: process.env.BASE_URL || 'https://backend-autofintion.microlance.id/'
+        baseURL: process.env.BASE_URL || 'http://127.0.0.1:8000'
     }
 }
 

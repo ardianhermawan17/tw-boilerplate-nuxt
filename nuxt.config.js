@@ -8,7 +8,7 @@ import target from './config/target'
 import plugins from './config/plugins'
 import build from './config/build'
 import buildModules from './config/buildModules'
-import axios from './config/axios'
+// import axios from './config/axios'
 import auth from './config/auth'
 import moment from './config/moment'
 import router from './config/router'
@@ -19,9 +19,9 @@ import modules from './config/modules'
 import proxy from './config/proxy'
 // import image from './config/image'
 import storage from './config/storage'
-import env from './config/env'
-// import privateRuntimeConfig from './config/privateRuntimeConfig'
-// import publicRuntimeConfig from './config/publicRuntimeConfig'
+// import env from './config/env'
+import privateRuntimeConfig from './config/privateRuntimeConfig'
+import publicRuntimeConfig from './config/publicRuntimeConfig'
 
 export default {
     // Global page headers: https://go.nuxtjs.dev/config-head
@@ -35,7 +35,7 @@ export default {
     //     resourceHints: false
     // },
 
-    env,
+    // env,
 
     // Auto import components: https://go.nuxtjs.dev/config-components
     components,
@@ -59,7 +59,7 @@ export default {
     buildModules,
 
     // Axios module configuration: https://go.nuxtjs.dev/config-axios
-    axios,
+    // axios,
 
     // (Auth Next) module configuration: https://auth.nuxtjs.org/
     auth,
@@ -95,9 +95,9 @@ export default {
     vuetify,
 
     // // Runtime Configuration: https://nuxtjs.org/docs/2.x/directory-structure/nuxt-config#publicruntimeconfig
-    // publicRuntimeConfig,
+    publicRuntimeConfig,
 
     // // Runtime Configuration: https://nuxtjs.org/docs/2.x/directory-structure/nuxt-config#privateruntimeconfig
-    // privateRuntimeConfig
+    privateRuntimeConfig
 
 }
