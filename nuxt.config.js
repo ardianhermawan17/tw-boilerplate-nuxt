@@ -8,7 +8,7 @@ import target from './config/target'
 import plugins from './config/plugins'
 import build from './config/build'
 import buildModules from './config/buildModules'
-// import axios from './config/axios'
+import axios from './config/axios'
 import auth from './config/auth'
 import moment from './config/moment'
 import router from './config/router'
@@ -59,7 +59,7 @@ export default {
     buildModules,
 
     // Axios module configuration: https://go.nuxtjs.dev/config-axios
-    // axios,
+    axios,
 
     // (Auth Next) module configuration: https://auth.nuxtjs.org/
     auth,
